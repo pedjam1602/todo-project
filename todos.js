@@ -60,20 +60,27 @@ function completedForUser(listOfTodos, idOfUser){
 
 // NAPISATI FUNKCIJU KOJA CE DA VRATI NEKOMPLETIRANE TODO-ove KORISNIKA 2 I 3
 
-
+function allIds (list){
+    list.forEach(todo => {
+        console.log(todo.id + ' Hello neighbor');
+    });
+}
 
 
 
 async function main() {
 
     const todos = await getTodos("/todos");
-
-    const nonCompleted = filterTodosByCompletion(todos, UNCOMPLETED)
-    const completed = filterTodosByCompletion(todos, COMPLETED);
+    console.log(todos);
+    allIds(todos);
+    // const nonCompleted = filterTodosByCompletion(todos, UNCOMPLETED)
+    // const completed = filterTodosByCompletion(todos, COMPLETED);
 
     //console.log(nonCompleted, completed);
-    const userCompletedTodos = completedForUser(todos,1);
-    console.log(userCompletedTodos);
+    // const userCompletedTodos = completedForUser(todos,1);
+    // console.log(userCompletedTodos);
+    // console.log(nonCompleted);
+    // console.log(completed);
 
 
     // const userTodos = todosOfUser(3, todos);

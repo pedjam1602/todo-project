@@ -65,6 +65,18 @@ function allIds (list){
         console.log(todo.id + ' Hello neighbor');
     });
 }
+// NAPISATI FUNKCIJU KOJA VRACA SVE TACNE TODO-ove CIJI JE BROJ KARAKTERA U TITLE-u MANJI OD 40
+function shortAndtrue (list) {
+   let trueElements = filterCompletedTodos(list);
+    let short = [];
+    for( let i=0; i<trueElements.length; i++){
+        if(trueElements[i].title.length<40)
+        short.push(trueElements[i].id)
+    }
+    return short;
+}
+
+
 
 
 
@@ -72,7 +84,8 @@ async function main() {
 
     const todos = await getTodos("/todos");
     console.log(todos);
-    allIds(todos);
+    // allIds(todos);
+    console.log(shortAndtrue(todos))
     // const nonCompleted = filterTodosByCompletion(todos, UNCOMPLETED)
     // const completed = filterTodosByCompletion(todos, COMPLETED);
 

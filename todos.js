@@ -65,8 +65,14 @@ function allIds (list){
         console.log(todo.id + ' Hello neighbor');
     });
 }
+
 // NAPISATI FUNKCIJU KOJA VRACA SVE TACNE TODO-ove CIJI JE BROJ KARAKTERA U TITLE-u MANJI OD 40
 function shortAndtrue (list) {
+    //KOMENTARI 
+
+    // trueElements treba da bude const, ne let 
+    // nigde u okviru ove funkcije se ne menja vrednost ove promenljive
+    // u tom slucaju koristimo const
    let trueElements = filterCompletedTodos(list);
     let short = [];
     for( let i=0; i<trueElements.length; i++){
@@ -74,6 +80,33 @@ function shortAndtrue (list) {
         short.push(trueElements[i].id)
     }
     return short;
+
+    // evo ti dobar primer zasto koristimo map, filter i ostale takve funkcije
+    // pogledaj moju implementaciju dole i tvoju gore
+    // ti imas dodatni niz short koji svakako negde zauzima mesto u memoriji 
+    // ja sam preskocio i taj dodatni niz i for petlju i naredbu short.push(...) 
+    // u ovom slucaju ce moj kod da radi primetno brze od tvog 
+    // zato je bitno da razumes map, filter, foreach i tako dalje
+}
+
+function shortAndTrue2(list) {
+    const trueElements = filterCompletedTodos(list);
+
+    return trueElements.filter(todo => {
+        if(todo.title.length<40)
+            return todo;
+    })
+    .map(todo => todo.title) // AKO DODAMO OVAJ MAP - VRATICEMO SAMO NASLOVE SVIH TODO-OVAw
+}
+
+function shortAndTrue3(list) {
+    const trueElements = filterCompletedTodos(list);
+    // ============= FUNKCIONALNOST MOZE DA SE SVEDE I NA JEDNU LINIJU SAMO ===================
+    return trueElements.filter(element => element.title.length < 40)
+    // ============= OBRATI PAZNJU NA LINIJU KODA GORE ===========
+    
+    // OVO JE IDENTICNO KAO filter KOJI SAM NAPISAO GORE
+    // SAMO JE JOS KRACE
 }
 
 
@@ -86,6 +119,7 @@ async function main() {
     console.log(todos);
     // allIds(todos);
     console.log(shortAndtrue(todos))
+    console.log(shortAndTrue2(todos))
     // const nonCompleted = filterTodosByCompletion(todos, UNCOMPLETED)
     // const completed = filterTodosByCompletion(todos, COMPLETED);
 

@@ -12,6 +12,14 @@ async function getTodos(path) {
 
     return todos;
 }
+function evenNum(num){
+    if(num%2==0){
+        return true;
+    }else{
+        return false;
+    }
+}
+
 
 function filterCompletedTodos(todos) {
     const completedTodos = todos.filter(todo => todo.completed === true)
@@ -109,6 +117,36 @@ function shortAndTrue3(list) {
     // SAMO JE JOS KRACE
 }
 
+//FILTER AND MAP
+//NAPISATI FUNKCIJU KOJA VRACA SVE TITLOVE TODO-A ZA UNETI USERID
+function titles(list,eneredId){
+    return list.filter(todo => {
+        if(todo.userId===eneredId){   
+            return todo;
+        }
+    })
+    .map(todo =>todo.title)
+}
+//NAPISATI FUNKCIJU KOJA VRACA TITLE SVIH TACNIH TODO-A
+function titlesOfTrue(list){
+    return list.filter(todo => todo.completed === true).map(todo=>todo.title)
+}
+//NAPISATI FUNKCIJU KOJA VRACA SVE ID ZA SVE NETACNE TODO-E ZA UNETI USERID
+function idOfFalse(list,enteredId){
+    return list.filter(todo => todo.userId === enteredId && todo.completed===false).map(todo=>todo.id)
+}
+//NAPISATI FUNKCIJU KOJA VRACA TITLOVE ZA SVE PARNE ID-JEVE KOJI SU KOMPLETIRANI
+function evenTitle(list){
+    return list.filter(todo =>{
+        if(evenNum(todo.id)===true &&todo.completed ===true){
+            
+            return todo;
+        }
+    }).map(todo =>todo.id)
+}
+
+
+
 
 
 
@@ -117,9 +155,14 @@ async function main() {
 
     const todos = await getTodos("/todos");
     console.log(todos);
+    console.log(titles(todos,8));
+    console.log(titlesOfTrue(todos))
+    console.log(idOfFalse(todos,2))
+    console.log(evenTitle(todos))
+
     // allIds(todos);
-    console.log(shortAndtrue(todos))
-    console.log(shortAndTrue2(todos))
+    // console.log(shortAndtrue(todos))
+    // console.log(shortAndTrue2(todos))
     // const nonCompleted = filterTodosByCompletion(todos, UNCOMPLETED)
     // const completed = filterTodosByCompletion(todos, COMPLETED);
 

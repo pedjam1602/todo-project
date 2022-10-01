@@ -117,7 +117,7 @@ function shortAndTrue3(list) {
     // SAMO JE JOS KRACE
 }
 
-//FILTER AND MAP
+
 //NAPISATI FUNKCIJU KOJA VRACA SVE TITLOVE TODO-A ZA UNETI USERID
 function titles(list,eneredId){
     return list.filter(todo => {
@@ -144,9 +144,38 @@ function evenTitle(list){
         }
     }).map(todo =>todo.id)
 }
-
-
-
+// NAPISATI FUNKCIJU KOJA VRACA UKUPAN BROJ KARAKTERA U CELOM TODOS-u
+let num = 0;
+function total(list){
+    return list.reduce((acc,cur) =>{
+        return acc + cur.title.length
+    },0)
+}
+//NAPISATI FUNKCIJU KOJA VRACA UKUPAN BROJ KARAKTERA TITLE-a SVIH TRUE-COMPLETED TODO-OVA
+function sumOfTrueTodos(list){
+    return list.filter(todo => todo.completed === true).reduce((first,current) => first+current.title.length,0)
+}
+//NAPISATI FUNKCIJU KOJA PRIKAZUJE UKUPAJ BROJ TACNIH I NETACNIH TODO-ova
+function sumOfTrueAndFalse(list){
+    let trueTodo = 0;
+    let falseTodo = 0;
+    list.forEach(todo=>todo.completed===true?trueTodo++:falseTodo++);
+    let sum ={trueTodo,
+        falseTodo,
+        suma:trueTodo+falseTodo}
+    return (sum)
+}
+//PRIKAZIVANJE SAMO PRVE POLOVINE LISTE
+function firstHalf(list){
+    return list.slice(0,list.length/2);
+}
+//NAPISATIO FUNKCIJU KOJA CE DA NADJE IZMEDJU low I high TODO-A TODO 
+//KOJI JE TRUE I CIJI JE BROJ KARAKTERA MANJI OD 40,A USERID NEPARAN I PRIKAZE NJEGOV TITLE
+function test(list,low,high){
+    const neededList = list.slice(low,high+1);
+    let element = neededList.filter(todo =>todo.completed === true && todo.title.length<=40 && todo.userid%2!=0).map(todo =>todo.title)
+    return element
+}
 
 
 
@@ -159,6 +188,11 @@ async function main() {
     console.log(titlesOfTrue(todos))
     console.log(idOfFalse(todos,2))
     console.log(evenTitle(todos))
+    console.log(total(todos))
+    console.log(sumOfTrueTodos(todos))
+    console.log(sumOfTrueAndFalse(todos))
+    console.log(firstHalf(todos))
+    console.log(test(todos,50,100))
 
     // allIds(todos);
     // console.log(shortAndtrue(todos))
